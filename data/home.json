@@ -8,7 +8,7 @@
     "projectes_visibles": [
         {
             "slug": "new-ywork",
-            "color": "#748873",
+            "color": "#96C9F4",
             "visible": true
         },
         {
@@ -18,12 +18,12 @@
         },
         {
             "slug": "blanca-arias",
-            "color": "#7B4019",
+            "color": "#FFC4C4",
             "visible": true
         },
         {
             "slug": "dentro-caballo",
-            "color": "#FF8FB7",
+            "color": "#96A78D",
             "visible": true
         },
           {
