@@ -2,7 +2,7 @@
     "slug": "new-ywork",
     "primera_imatge": {
         "src": "images/NY/1.jpg",
-        "size": "75"
+        "size": "100"
     },
     "titol": {
         "cat": "New Ywork",
@@ -28,11 +28,11 @@
     "imatges": [
         {
             "src": "images/NY/2.jpg",
-            "size": "100"
+            "size": "75"
         },
         {
             "src": "images/NY/3.jpg",
-            "size": "75"
+            "size": "100"
         }
     ]
 }

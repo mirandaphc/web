@@ -2,16 +2,16 @@
     "slug": "dentro-caballo",
     "primera_imatge": {
         "src": "images/dentroCaballo/1.jpg",
-        "size": "75"
+        "size": "100"
     },
     "titol": {
-        "cat": "Cenar dentro de de un caballo / *Cenare all'interno di un cavallo*",
-        "es": "Cenar dentro de de un caballo / *Cenare all'interno di un cavallo*",
+        "cat": "Cenar dentro de un caballo / *Cenare all'interno di un cavallo*",
+        "es": "Cenar dentro de un caballo / *Cenare all'interno di un cavallo*",
         "link": ""
     },
     "client": {
-        "cat": "Carla Boserman",
-        "es": "Carla Boserman",
+        "cat": "___Carla Boserman___",
+        "es": "___Carla Boserma___",
         "link": ""
     },
     "data": "2023",
@@ -26,7 +26,7 @@
     "imatges": [
         {
             "src": "images/dentroCaballo/2.jpg",
-            "size": "100"
+            "size": "75"
         },
         {
             "src": "images/dentroCaballo/3.jpg",
