@@ -1,12 +1,22 @@
 {
-  "text": {
+"text": {
     "cat": [
-      "Primer paràgraf amb **negreta** i *cursiva* o __subratllat__.",
-      "Segon paràgraf amb [enllaç](https://ejemplo.com)."
+        "*Departament exotèric 2020* (MACBA) Amb Maria Pipla, Victor Ruiz Colomer, Raquel Bautista, Juan Pablo Campistrous. Ens pots llegir [aquí](https://www.macba.cat/edu/quadern-educatiu-cat.pdf) (pàgina 40)",
+        "*Picnic del Barrio* (Museo Situado, Museo Reina Sofía)",
+        "*[Branca #4](https://branca.cat/numeros/)* Mala literatura. Això és art.",
+        "*[invertebrados 2024](https://jornadasinvertebrados.com/)*. Equip curatorial i organitzador. Amb Manuel Padín, Arturo Batanero, Clara Neches i Claudio Hontana.",
+        "*[Vivim en un món devorat](https://nyamnyam.net/vivim-en-un-mon-devorat-2024)*. La quinzena d’art 2024 (Espai Nyam Nyam)",
+        "__Equipa gràáfica__ amb [Carla Boserman](https://www.carlaboserman.net/). Col·lectiu que edita i imprimeix dispositius gràfics que documenten processos a través de relatories, dibuixos i altres materials.",
+        "__6508__ amb Ricardo Pérez-Hita. Publicacions, fanzines i paperets."
     ],
     "es": [
-      "Primer párrafo con **negrita** y *cursiva* o __subrayado__.",
-      "Segundo párrafo con [link](https://ejemplo.com)."
+        "*Departament exotèric 2020* (MACBA) Con Maria Pipla, Victor Ruiz Colomer, Raquel Bautista y Juan Pablo Campistrous. Nos puedes leer [aquí](https://www.macba.cat/edu/quadern-educatiu-cat.pdf) (página 40)",
+        "*Picnic del Barrio* (Museo Situado, Museo Reina Sofía)",
+        "*[Branca #4](https://branca.cat/numeros/)* Mala literatura. Això és art.",
+        "*[invertebrados 2024](https://jornadasinvertebrados.com/)*. Equipo curatorial y organizador. Con Manuel Padín, Arturo Batanero, Clara Neches y Claudio Hontana.",
+        "*[Vivim en un món devorat](https://nyamnyam.net/vivim-en-un-mon-devorat-2024)*. La quinzena d’art 2024 (Espai Nyam Nyam)",
+        "__Equipa gràáfica__ con [Carla Boserman](https://www.carlaboserman.net/). Colectivo que edita e imprime dispositivos gráficos que documentan procesos a través de relatorías, dibujos y otros materiales.",
+        "__6508__ con Ricardo Pérez-Hita. Publicaciones, fanzines y papelitos."
     ]
-  }
+}
 }
