@@ -195,7 +195,7 @@ function renderAbout() {
   body.className = "about-body";
 
   const h2 = document.createElement("h2");
-  h2.textContent = "miranda perez hita";
+  h2.textContent = "Miranda Pérez-Hita";
   body.appendChild(h2);
 
   const paragraphs = getLocalizedParagraphs(aboutData?.text, activeLanguage);
