@@ -1,0 +1,12 @@
+{
+  "text": {
+    "cat": [
+      "Primer paràgraf amb **negreta** i *cursiva* o __subratllat__.",
+      "Segon paràgraf amb [enllaç](https://ejemplo.com)."
+    ],
+    "es": [
+      "Primer párrafo con **negrita** y *cursiva* o __subrayado__.",
+      "Segundo párrafo con [link](https://ejemplo.com)."
+    ]
+  }
+}

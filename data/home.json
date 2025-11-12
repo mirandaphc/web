@@ -1,0 +1,25 @@
+{
+    "home_colors": {
+        "cat": "#E6D8C3",
+        "es": "#F8E3CE"
+    },
+    "nota_de_curt": 0,
+    "_comment": "nota_de_curt en 35 funciona bastante bien",
+    "projectes_visibles": [
+        {
+            "slug": "new-ywork",
+            "color": "#748873",
+            "visible": true
+        },
+        {
+            "slug": "monica-planes",
+            "color": "#E8988A",
+            "visible": true
+        },
+        {
+            "slug": "blanca-arias",
+            "color": "#7B4019",
+            "visible": true
+        }
+    ]
+}

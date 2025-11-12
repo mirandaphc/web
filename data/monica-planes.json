@@ -1,0 +1,49 @@
+{
+    "slug": "monica-planes",
+    
+    "primera_imatge": {
+        "src": "images/monicaPlanes/1.jpeg",
+        "size": "100"
+    },
+    "titol": {
+        "cat": "Monica Planes",
+        "es": "Monica Planes",
+        "link": ""
+    },
+    "client": {
+        "cat": "Client Exemple",
+        "es": "Cliente Ejemplo",
+        "link": ""
+    },
+    "data": "2024",
+    "text": {
+        "cat": [
+            "Projecte de disseny per a Monica Planes."
+        ],
+        "es": [
+            "Proyecto de diseño para Monica Planes."
+        ]
+    },
+    "imatges": [
+        {
+            "src": "images/monicaPlanes/2.jpeg",
+            "size": "100"
+        },
+        {
+            "src": "images/monicaPlanes/3.jpeg",
+            "size": "100"
+        },
+        {
+            "src": "images/monicaPlanes/4.jpeg",
+            "size": "100"
+        },
+        {
+            "src": "images/monicaPlanes/5.jpeg",
+            "size": "100"
+        },
+        {
+            "src": "images/monicaPlanes/6.jpeg",
+            "size": "100"
+        }
+    ]
+}

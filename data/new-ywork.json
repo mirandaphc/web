@@ -1,0 +1,37 @@
+{
+    "slug": "new-ywork",
+    "primera_imatge": {
+        "src": "images/NY/1.jpg",
+        "size": "100"
+    },
+    "titol": {
+        "cat": "New Ywork",
+        "es": "New Ywork",
+        "link": ""
+    },
+    "client": {
+        "cat": "Jaume Cloret",
+        "es": "Jaume Cloret",
+        "link": ""
+    },
+    "data": "2024",
+    "text": {
+        "cat": [
+            "Disseny del fanzine / catàleg / còmic de l’exposició «[New Ywork](https://www.lacapella.barcelona/es/new-ywork)» al Centre d’Art La Capella. La publicació recull dibuixos previs, peces de l’exposició i idees que no van quedar tancades. La [presentació](https://www.lacapella.barcelona/es/presentacion-de-la-publicacion-new-ywork) es va fer el 24 de maig de 2024 a Fatbottom. Si en voleu un, en queden poquets [aquí](https://fatbottombooks.com/books/fanzine/new-ywork).",
+            "Publicació coordinada per Ana Urdániz Bondía.\nFotos del [Pol Rebaque](https://polrebaque.com/)."
+        ],
+        "es": [
+            "Diseño del catálogo / Exposición / carga de \"New Ywork\", exposición de Beatrice Jacome Clotet en La Capella."
+        ]
+    },
+    "imatges": [
+        {
+            "src": "images/NY/2.jpg",
+            "size": "50"
+        },
+        {
+            "src": "images/NY/3.jpg",
+            "size": "70"
+        }
+    ]
+}

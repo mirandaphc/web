@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Formateador — textos → array por párrafo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      font: 16px/1.6 "Times New Roman", serif;
+      color: #1c140d;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      background: #e6d8c3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1.5rem;
+    }
+
+    main {
+      width: min(720px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .panel,
+    textarea,
+    .out,
+    .actions button {
+      border-radius: 0;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.88);
+      padding: 1.5rem 1.25rem;
+      box-shadow: 0 10px 26px rgba(61, 49, 33, 0.08);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 240px;
+      padding: 1.1rem;
+      border: 1px solid rgba(28, 20, 13, 0.18);
+      background: rgba(255, 255, 255, 0.96);
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea + textarea {
+      margin-top: 1.25rem;
+    }
+
+    textarea::placeholder {
+      color: rgba(28, 20, 13, 0.5);
+      letter-spacing: 0.08em;
+    }
+
+    .import-panel textarea {
+      min-height: 160px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    textarea.error {
+      border-color: rgba(182, 38, 0, 0.7);
+      box-shadow: 0 0 0 1px rgba(182, 38, 0, 0.25);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .import-actions {
+      margin-bottom: 0;
+    }
+
+    button {
+      font-family: "Times New Roman", serif;
+      padding: 0.55rem 1.15rem;
+      border: 1px solid rgba(28, 20, 13, 0.16);
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.92);
+      color: inherit;
+      letter-spacing: 0.01em;
+      transition: transform 120ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .out {
+      min-height: 180px;
+      white-space: pre;
+      background: rgba(32, 24, 12, 0.94);
+      color: #fdf7ed;
+      padding: 1.4rem;
+      overflow: auto;
+      border: 1px solid rgba(17, 12, 6, 0.4);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+
+  <body>
+  <main>
+    <section class="panel import-panel">
+      <textarea id="estadoActual" placeholder='"text": { "cat": [ ... ], "es": [ ... ] },'></textarea>
+      <div class="actions import-actions">
+        <button id="btnImportar">Traer al editor</button>
+      </div>
+    </section>
+
+    <section class="panel input-panel">
+      <textarea data-lang="cat"
+        placeholder="CAT"></textarea>
+
+      <textarea data-lang="es"
+        placeholder="ES"></textarea>
+
+      <div class="actions">
+        <!-- <button id="limpiar">Limpiar</button> -->
+        <button id="btnBold" title="Negrita (**)">B</button>
+        <button id="btnItalic" title="Cursiva (*)">I</button>
+        <button id="btnUnderline" title="Subrayado (__)">U</button>
+        <button id="btnLink" title="Enlace [texto](url)">Link</button>
+        <button id="copiar">Copiar</button>
+      </div>
+    </section>
+
+    <section class="panel output-panel">
+      <div class="out" id="salida" aria-label="Salida JSON" tabindex="0"></div>
+    </section>
+  </main>
+
+  <script>
+    const salida = document.getElementById('salida');
+    const btnCopiar = document.getElementById('copiar');
+    // const btnLimpiar = document.getElementById('limpiar');
+    const btnBold = document.getElementById('btnBold');
+    const btnItalic = document.getElementById('btnItalic');
+    const btnUnderline = document.getElementById('btnUnderline');
+    const btnLinkFmt = document.getElementById('btnLink');
+    const btnImportar = document.getElementById('btnImportar');
+    const estadoActual = document.getElementById('estadoActual');
+    const textareas = Array.from(document.querySelectorAll('textarea[data-lang]'));
+    const LANG_ORDER = textareas.map((el) => el.dataset.lang);
+
+    function normalizarSaltos(s = '') {
+      return s.replace(/\r\n?/g, '\n')
+        .replace(/[ \t]+\n/g, '\n')
+        .replace(/\n{3,}/g, '\n\n');
+    }
+
+    function jsonString(v) {
+      return JSON.stringify(v);
+    }
+
+    function obtenerTextareaActiva() {
+      const active = document.activeElement;
+      return textareas.includes(active) ? active : textareas[0];
+    }
+
+    function obtenerParrafos(valor) {
+      const text = normalizarSaltos(valor || '');
+      if (!text.trim()) return [];
+      return text.trim().split(/\n\s*\n+/).map((p) =>
+        p.replace(/[ \t]+\n/g, '\n').replace(/\n{2,}/g, '\n').trim()
+      ).filter(Boolean);
+    }
+
+    function formatearArray(arr, indentLevel) {
+      const indent = '    '.repeat(indentLevel);
+      const innerIndent = '    '.repeat(indentLevel + 1);
+      if (!arr.length) return '[]';
+      const lines = arr.map((item) => `${innerIndent}${jsonString(item)}`);
+      return `[\n${lines.join(',\n')}\n${indent}]`;
+    }
+
+    function extraerBloqueText(source) {
+      const texto = (source || '').toString();
+      const keyIndex = texto.indexOf('"text"');
+      if (keyIndex === -1) return null;
+      const colonIndex = texto.indexOf(':', keyIndex);
+      if (colonIndex === -1) return null;
+      let idx = colonIndex + 1;
+      while (idx < texto.length && /\s/.test(texto[idx])) idx++;
+      const inicio = texto[idx];
+      if (inicio !== '{' && inicio !== '[') return null;
+      const cierre = inicio === '{' ? '}' : ']';
+      let depth = 0;
+      let inString = false;
+      let escape = false;
+      for (let i = idx; i < texto.length; i++) {
+        const ch = texto[i];
+        if (inString) {
+          if (escape) {
+            escape = false;
+          } else if (ch === '\\') {
+            escape = true;
+          } else if (ch === '"') {
+            inString = false;
+          }
+          continue;
+        }
+        if (ch === '"') {
+          inString = true;
+          continue;
+        }
+        if (ch === inicio) {
+          depth++;
+        } else if (ch === cierre) {
+          depth--;
+          if (depth === 0) {
+            return texto.slice(idx, i + 1);
+          }
+        }
+      }
+      return null;
+    }
+
+    function parsearEstadoActual(raw) {
+      const trimmed = (raw || '').trim();
+      if (!trimmed) return null;
+      const variantes = [];
+      const sinComaFinal = trimmed.replace(/,\s*$/, '');
+
+      [trimmed, sinComaFinal].forEach((valor) => {
+        if (!valor) return;
+        if (!variantes.includes(valor)) variantes.push(valor);
+        if (!/^[\[{]/.test(valor)) {
+          const envuelto = `{${valor}}`;
+          if (!variantes.includes(envuelto)) variantes.push(envuelto);
+        }
+      });
+
+      let ultimoError = null;
+      for (const candidato of variantes) {
+        try {
+          return JSON.parse(candidato);
+        } catch (err) {
+          ultimoError = err;
+        }
+      }
+
+      const bloqueText = extraerBloqueText(trimmed);
+      if (bloqueText) {
+        try {
+          return JSON.parse(`{"text": ${bloqueText}}`);
+        } catch (err) {
+          ultimoError = err;
+        }
+      }
+
+      throw ultimoError || new Error('Formato no reconocido');
+    }
+
+    function cargarDesdeEstado() {
+      if (!estadoActual) return;
+      const raw = estadoActual.value;
+      if (!raw.trim()) {
+        estadoActual.classList.remove('error');
+        return;
+      }
+
+      try {
+        const data = parsearEstadoActual(raw);
+        const textData = data && typeof data === 'object' ? (data.text && typeof data.text === 'object' ? data.text : data) : null;
+        if (!textData || typeof textData !== 'object') throw new Error('Sin objeto text');
+
+        textareas.forEach((field) => {
+          const lang = field.dataset.lang;
+          const contenido = textData[lang];
+          if (Array.isArray(contenido)) {
+            field.value = contenido.join('\n\n');
+          } else if (typeof contenido === 'string') {
+            field.value = contenido;
+          } else {
+            field.value = '';
+          }
+        });
+
+        estadoActual.classList.remove('error');
+        generar();
+      } catch (err) {
+        console.error(err);
+        estadoActual.classList.add('error');
+        alert('No se ha podido interpretar el bloque pegado. Revisa que sea JSON válido con "text".');
+      }
+    }
+
+    function generar() {
+      const result = {};
+      LANG_ORDER.forEach((lang) => {
+        const field = textareas.find((el) => el.dataset.lang === lang);
+        result[lang] = obtenerParrafos(field ? field.value : '');
+      });
+
+      const entries = LANG_ORDER.map((lang) => {
+        const arrayStr = formatearArray(result[lang], 1);
+        return `    "${lang}": ${arrayStr}`;
+      });
+
+      salida.textContent = `"text": {\n${entries.join(',\n')}\n},`;
+    }
+
+    btnCopiar.addEventListener('click', async () => {
+      const txt = salida.textContent;
+      if (!txt) return;
+      try {
+        await navigator.clipboard.writeText(txt);
+        btnCopiar.textContent = '¡Copiado!';
+        setTimeout(() => btnCopiar.textContent = 'Copiar', 1200);
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(salida);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    });
+
+    // btnLimpiar.addEventListener('click', () => {
+    //   textareas.forEach((field) => { field.value = ''; });
+    //   const first = textareas[0];
+    //   if (first) first.focus();
+    //   generar();
+    // });
+
+    function wrapSelection(before, after) {
+      const field = obtenerTextareaActiva();
+      if (!field) return;
+      const start = field.selectionStart;
+      const end = field.selectionEnd;
+      const value = field.value;
+      const sel = value.slice(start, end) || '';
+      const replaced = value.slice(0, start) + before + sel + after + value.slice(end);
+      field.value = replaced;
+      const newStart = start + before.length;
+      const newEnd = newStart + sel.length;
+      field.setSelectionRange(newStart, newEnd);
+      generar();
+    }
+
+    function addLink() {
+      const field = obtenerTextareaActiva();
+      if (!field) return;
+      const start = field.selectionStart;
+      const end = field.selectionEnd;
+      const current = field.value.slice(start, end).trim();
+      const text = current || prompt('Texto del enlace:', '');
+      if (text === null) return;
+      let url = prompt('URL (https:// o mailto:):', 'https://');
+      if (url === null) return;
+      url = url.replace(/^(https?):\s*\/\//i, '$1://').trim();
+      if (!/^(https?:\/\/|mailto:)/i.test(url)) {
+        alert('La URL debe empezar por https:// o mailto:');
+        return;
+      }
+      const value = field.value;
+      const replaced = value.slice(0, start) + `[${text}](${url})` + value.slice(end);
+      field.value = replaced;
+      const pos = start + (`[${text}](${url})`).length;
+      field.setSelectionRange(pos, pos);
+      generar();
+    }
+
+    btnBold.addEventListener('click', () => wrapSelection('**', '**'));
+    btnItalic.addEventListener('click', () => wrapSelection('*', '*'));
+    btnUnderline.addEventListener('click', () => wrapSelection('__', '__'));
+    btnLinkFmt.addEventListener('click', addLink);
+
+    if (estadoActual) {
+      estadoActual.addEventListener('input', () => estadoActual.classList.remove('error'));
+    }
+
+    if (btnImportar) {
+      btnImportar.addEventListener('click', cargarDesdeEstado);
+    }
+
+    textareas.forEach((field) => field.addEventListener('input', generar));
+    generar();
+  </script>
+</body>
+
+</html>
