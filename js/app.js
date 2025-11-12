@@ -350,6 +350,20 @@ function formatInline(s = "") {
   return out;
 }
 
+function escapeHtml(str = "") {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function formatTitleText(value = "") {
+  return escapeHtml(value).replace(
+    /(^|[^\*])\*([^\*][\s\S]*?)\*(?!\*)/g,
+    "$1<em>$2</em>"
+  );
+}
+
 // Devuelve el texto en el idioma activo con fallback a catalán y primer valor disponible
 function getLocalizedText(source, lang = activeLanguage) {
   if (!source) return "";
@@ -631,9 +645,17 @@ function populateProjectInfo(target, projectData, projectTitleOverride) {
     clientVal = projectData.client;
   }
   const year = (projectData.data || "").toString();
-  firstP.textContent = [projectTitle, clientVal, year]
-    .filter(Boolean)
-    .join(", ");
+  const infoParts = [];
+  if (projectTitle) {
+    infoParts.push({ html: formatTitleText(projectTitle) });
+  }
+  if (clientVal) {
+    infoParts.push({ html: escapeHtml(clientVal) });
+  }
+  if (year) {
+    infoParts.push({ html: escapeHtml(year) });
+  }
+  firstP.innerHTML = infoParts.map((part) => part.html).join(", ");
   target.appendChild(firstP);
 
   const hasTextos =
@@ -673,7 +695,7 @@ function renderProjectMenu() {
       button.setAttribute("aria-current", "true");
     }
     const title = getLocalizedText(projectData.titol);
-    button.textContent = title || project.slug;
+    button.innerHTML = formatTitleText(title || project.slug);
     button.onclick = () => scrollToProject(project.slug);
 
     projectMenu.appendChild(button);

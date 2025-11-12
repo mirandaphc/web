@@ -25,6 +25,11 @@
             "slug": "dentro-caballo",
             "color": "#FF8FB7",
             "visible": true
+        },
+          {
+            "slug": "as-time-bends",
+            "color": "#87BAC3",
+            "visible": true
         }
     ]
 }

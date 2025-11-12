@@ -1,0 +1,38 @@
+{
+    "slug": "as-time-bends",
+    "primera_imatge": {
+        "src": "images/asTimeBends/1.png",
+        "size": "100"
+    },
+    "titol": {
+        "cat": "As time bends",
+        "es": "As time bends",
+        "link": ""
+    },
+    "client": {
+        "cat": "Maria Pipla",
+        "es": "Maria Pipla",
+        "link": ""
+    },
+    "data": "2023",
+    "text": {
+        "cat": [
+            "Títols de crèdit i cartell per «As time bends», un assaig coreogràfic sobre el temps fílmic. Peça de [Maria Pipla](https://miapipla.com/), projectada al [Festival (S8)](https://s8cinema.com/), A Coruña.",
+            "Coreògrafa i intèrpret: Èlia Brugulat Rosselló."
+        ],
+        "es": [
+            "Titulos de crédito y cartel para «As time bends», un ensayo coreográfico sobre el tiempo fílmico. Pieza de [Maria Pipla](https://miapipla.com/), proyectada en el [Festival (S8)](https://s8cinema.com/), A Coruña.",
+            "Coreógrafa e intérprete: Èlia Brugulat Rosselló."
+        ]
+    },
+    "imatges": [
+        {
+            "src": "images/asTimeBends/2.png",
+            "size": "75"
+        },
+        {
+            "src": "images/asTimeBends/3.png",
+            "size": "100"
+        }
+    ]
+}

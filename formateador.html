@@ -155,6 +155,7 @@
     const estadoActual = document.getElementById('estadoActual');
     const textareas = Array.from(document.querySelectorAll('textarea[data-lang]'));
     const LANG_ORDER = textareas.map((el) => el.dataset.lang);
+    let ultimaTextareaActiva = textareas[0] || null;
 
     function normalizarSaltos(s = '') {
       return s.replace(/\r\n?/g, '\n')
@@ -168,7 +169,11 @@
 
     function obtenerTextareaActiva() {
       const active = document.activeElement;
-      return textareas.includes(active) ? active : textareas[0];
+      if (textareas.includes(active)) {
+        ultimaTextareaActiva = active;
+        return active;
+      }
+      return ultimaTextareaActiva || textareas[0] || null;
     }
 
     function obtenerParrafos(valor) {
@@ -348,6 +353,7 @@
       field.value = replaced;
       const newStart = start + before.length;
       const newEnd = newStart + sel.length;
+      field.focus();
       field.setSelectionRange(newStart, newEnd);
       generar();
     }
@@ -371,6 +377,7 @@
       const replaced = value.slice(0, start) + `[${text}](${url})` + value.slice(end);
       field.value = replaced;
       const pos = start + (`[${text}](${url})`).length;
+      field.focus();
       field.setSelectionRange(pos, pos);
       generar();
     }
@@ -388,7 +395,11 @@
       btnImportar.addEventListener('click', cargarDesdeEstado);
     }
 
-    textareas.forEach((field) => field.addEventListener('input', generar));
+    textareas.forEach((field) => {
+      field.addEventListener('pointerdown', () => { ultimaTextareaActiva = field; });
+      field.addEventListener('focus', () => { ultimaTextareaActiva = field; });
+      field.addEventListener('input', generar);
+    });
     generar();
   </script>
 </body>
