@@ -20,6 +20,11 @@
             "slug": "blanca-arias",
             "color": "#7B4019",
             "visible": true
+        },
+        {
+            "slug": "dentro-caballo",
+            "color": "#FF8FB7",
+            "visible": true
         }
     ]
 }

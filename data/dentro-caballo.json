@@ -1,0 +1,36 @@
+{
+    "slug": "dentro-caballo",
+    "primera_imatge": {
+        "src": "images/dentroCaballo/1.jpg",
+        "size": "75"
+    },
+    "titol": {
+        "cat": "Cenar dentro de de un caballo / Cenare all'interno di un cavallo",
+        "es": "Cenar dentro de de un caballo / Cenare all'interno di un cavallo",
+        "link": ""
+    },
+    "client": {
+        "cat": "Carla Boserman",
+        "es": "Carla Boserman",
+        "link": ""
+    },
+    "data": "2023",
+    "text": {
+        "cat": [
+            "Disseny gràfic de la dimensió editorial del projecte «[Cenar dentro de un caballo / Cenare all’interno di un cavallo](https://www.accademiaspagna.org/portfolio/carla-boserman/)» de Carla Boserman a l’Academia de España en Roma. Tríptic que presenta les experiències compartides a través d’una sèrie de receptes vinculades a tres monuments eqüestres de la ciutat de Roma."
+        ],
+        "es": [
+            "Diseño gráfico de la dimensión editorial del proyecto «[Cenar dentro de un caballo / Cenare all’interno di un cavallo](https://www.accademiaspagna.org/portfolio/carla-boserman/)» de Carla Boserman en la Academia de España en Roma. Tríprico que presenta las experiencias compartidas a través de una serie de recetas vinculadas a tres monumentos ecuestres de la ciudad de Roma."
+        ]
+    },
+    "imatges": [
+        {
+            "src": "images/dentroCaballo/2.jpg",
+            "size": "100"
+        },
+        {
+            "src": "images/dentroCaballo/3.jpg",
+            "size": "100"
+        }
+    ]
+}
