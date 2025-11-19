@@ -1,5 +1,5 @@
 :root {
-  --underline-offset: 0.3em;
+  --underline-offset: 0.2em;
   --active-project-text-color: #000000;
   --home-bg-color: #ffffff;
   --sidebar-actual-height: 33vh;
@@ -26,6 +26,11 @@ html {
 
 a {
   color: inherit;
+}
+
+u {
+  text-decoration: underline;
+  text-underline-offset: var(--underline-offset);
 }
 
 button,
@@ -207,6 +212,12 @@ body.about-open #projects-container {
   font-size: 1rem;
   line-height: 1.5;
   margin-top: 0.25rem;
+}
+
+.project-info a,
+.project-text a {
+  text-decoration: underline;
+  text-underline-offset: var(--underline-offset);
 }
 
 /* Responsive: 600-1000px */
@@ -405,7 +416,6 @@ body.about-open #projects-container {
   text-align: center;
   line-height: 1.45;
   font-size: 1rem;
-  padding-bottom: 12vh;
 }
 
 .about-body {
@@ -435,14 +445,17 @@ body.about-open #projects-container {
 
 .about-content a {
   text-decoration: underline;
+  text-underline-offset: var(--underline-offset);
 }
 
 .about-footer {
-  position: absolute;
-  bottom: calc(10vh + var(--safe-bottom));
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 5rem;
   text-align: center;
+}
+
+.about-footer a {
+  text-decoration: underline;
+  text-underline-offset: var(--underline-offset);
 }
 
 .about-close {
@@ -490,4 +503,24 @@ body.about-open #projects-container {
   .about-panel {
     left: 25%;
   }
+}
+
+/* Animación de parpadeo para hover en subrayados - solo afecta al color del subrayado */
+@keyframes blink-underline {
+  0%, 100% {
+    text-decoration-color: currentColor;
+  }
+  50% {
+    text-decoration-color: transparent;
+  }
+}
+
+/* Aplicar parpadeo solo al subrayado, no al texto */
+.lang-btn:hover,
+.project-link:hover,
+.about-content a:hover,
+.about-footer a:hover,
+.project-info a:hover,
+.project-text a:hover {
+  animation: blink-underline 1.4s ease-in-out infinite;
 }

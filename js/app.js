@@ -17,6 +17,8 @@ let aboutTransitionHandler = null;
 
 const PASSIVE_SCROLL_OPTIONS = { passive: true };
 const DEFAULT_TEXT_COLOR = "#000000";
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1000; // 1 segundo
 
 // Elementos del DOM
 const sidebar = document.getElementById("sidebar");
@@ -106,11 +108,46 @@ function updateSafeAreaVars() {
   root.style.setProperty("--safe-right", `${Math.round(right)}px`);
 }
 
+// Función de fetch con reintentos para conexiones con poca cobertura
+async function fetchWithRetry(url, options = {}, retries = MAX_RETRIES) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos timeout
+      
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      
+      return response;
+    } catch (error) {
+      const isLastAttempt = attempt === retries;
+      
+      if (isLastAttempt) {
+        console.error(`Error al cargar ${url} después de ${retries + 1} intentos:`, error);
+        throw error;
+      }
+      
+      // Backoff exponencial: esperar más tiempo en cada reintento
+      const delay = RETRY_DELAY * Math.pow(2, attempt);
+      console.warn(`Reintentando ${url} en ${delay}ms (intento ${attempt + 1}/${retries})...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+}
+
 // Inicializar la aplicación
 async function init() {
   try {
     // Cargar home.json
-    const homeResponse = await fetch("data/home.json");
+    const homeResponse = await fetchWithRetry("data/home.json");
     homeData = await homeResponse.json();
     prepareProjectColorData();
 
@@ -152,17 +189,53 @@ async function init() {
     setupEventListeners();
   } catch (error) {
     console.error("Error al cargar datos:", error);
+    showLoadingError();
   }
+}
+
+// Mostrar mensaje de error al usuario
+function showLoadingError() {
+  const errorDiv = document.createElement("div");
+  errorDiv.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    color: #000;
+    padding: 2rem;
+    border: 1px solid #000;
+    text-align: center;
+    z-index: 9999;
+    max-width: 90vw;
+    font-family: inherit;
+  `;
+  
+  errorDiv.innerHTML = `
+    <p style="margin-bottom: 1rem;">Error al cargar el sitio web.</p>
+    <p style="margin-bottom: 1.5rem;">Por favor, verifica tu conexión a internet.</p>
+    <button onclick="location.reload()" style="
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+    ">Reintentar</button>
+  `;
+  
+  document.body.appendChild(errorDiv);
 }
 // Cargar about.json (formato: { "texto": ["párrafo 1", "párrafo 2", ...] })
 async function loadAbout() {
   try {
-    const res = await fetch("data/about.json");
-    if (!res.ok) return; // opcional: no bloquear si no existe
+    const res = await fetchWithRetry("data/about.json");
     aboutData = await res.json();
     renderAbout();
   } catch (e) {
-    // silencioso: si no existe o falla, lo veremos más adelante
+    console.warn("No se pudo cargar about.json:", e);
+    // silencioso: si no existe o falla, no bloquear la aplicación
   }
 }
 
@@ -195,7 +268,7 @@ function renderAbout() {
   body.className = "about-body";
 
   const h2 = document.createElement("h2");
-  h2.textContent = "";
+  h2.textContent = "miranda perez hita";
   body.appendChild(h2);
 
   const paragraphs = getLocalizedParagraphs(aboutData?.text, activeLanguage);
@@ -207,8 +280,6 @@ function renderAbout() {
 
   wrap.appendChild(body);
 
-  aboutPanel.appendChild(wrap);
-
   const footer = document.createElement("div");
   footer.className = "about-footer";
   const footerLink = document.createElement("a");
@@ -218,7 +289,9 @@ function renderAbout() {
   footerLink.textContent = "web: meowrhino";
   footer.appendChild(footerLink);
 
-  aboutPanel.appendChild(footer);
+  wrap.appendChild(footer);
+
+  aboutPanel.appendChild(wrap);
   setAboutOpen(wasOpen);
 }
 
@@ -578,11 +651,11 @@ async function loadProjects(projects) {
   await Promise.all(
     pending.map(async (project) => {
       try {
-        const response = await fetch(`data/${project.slug}.json`);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const response = await fetchWithRetry(`data/${project.slug}.json`);
         projectsData[project.slug] = await response.json();
       } catch (error) {
         console.error(`Error cargando proyecto ${project.slug}:`, error);
+        // No bloquear el renderizado si falla un proyecto individual
       }
     })
   );
@@ -709,8 +782,9 @@ function renderProjectMenu() {
 
 // Renderizar proyectos
 function renderProjects() {
-  const allProjects = getVisibleProjectsFromHome();
+  if (!projectsContainer) return;
   const visibleProjects = getVisibleProjects();
+  const allProjects = getVisibleProjectsFromHome();
   const visibleSlugs = visibleProjects.map((p) => p.slug);
 
   // Crear wrapper si no existe
@@ -726,8 +800,12 @@ function renderProjects() {
 
   // Renderizar todos los proyectos
   allProjects.forEach((project) => {
+    if (!project || !project.slug) return;
     const projectData = projectsData[project.slug];
-    if (!projectData) return;
+    if (!projectData) {
+      console.warn(`No se encontraron datos para el proyecto: ${project.slug}`);
+      return;
+    }
 
     const section = document.createElement("section");
     section.className = "project-section";
