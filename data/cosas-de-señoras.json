@@ -1,0 +1,45 @@
+{
+    "slug": "cosas-de-señoras",
+    "primera_imatge": {
+        "src": "images/cosasDeSeñoras/1.png",
+        "size": "100"
+    },
+    "titol": {
+        "cat": "Cosas de señoras y otros poemas",
+        "es": "Cosas de señoras y otros poemas",
+        "link": ""
+    },
+    "client": {
+        "cat": "Rita González",
+        "es": "Rita González",
+        "link": ""
+    },
+    "data": "2025",
+    "text": {
+    "cat": [
+        "**6508** Edició i maquetació de “Cosas de señoras y otros poemas” de Rita Gonzalez Soler. Primera impressió el 6 de juliol de 2025 per a fer una primera lectura a les festes del Raval. Es va fer una nova impressió el 22 de novembre. Entre les dues edicions, Lupe va entrevistar a Rita a CorAnimal, el seu programa a Contrabanda FM. Pots escoltar-la [aquí](https://coranimal.contrabanda.org/2025/07/19/con-rita-gonzalez-sobre-cosas-de-senoras-y-otros-poemas/)."
+    ],
+    "es": [
+        "**6508** Edición y maquetación de “Cosas de señoras y otros poemas” de Rita Gonzalez Soler. Primera impresión el 6 de julio de 2025 para hacer una primera lectura en las fiestas del Raval. Se realizó una nueva impresión el 22 de noviembre. Entre ambas ediciones, Lupe entrevistó a Rita en CorAnimal, su programa en Contrabanda FM. Puedes escucharla [aquí](https://coranimal.contrabanda.org/2025/07/19/con-rita-gonzalez-sobre-cosas-de-senoras-y-otros-poemas/)."
+    ]
+},
+    "imatges": [
+        {
+            "src": "images/cosasDeSeñoras/2.png",
+            "size": "100"
+        },
+        {
+            "src": "images/cosasDeSeñoras/3.png",
+            "size": "100"
+        },
+        {
+            "src": "images/cosasDeSeñoras/5.png",
+            "size": "100"
+        },
+         {
+            "src": "images/cosasDeSeñoras/6.png",
+            "size": "100"
+        }
+        
+    ]
+}

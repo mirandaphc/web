@@ -7,6 +7,11 @@
     "_comment": "nota_de_curt en 35 funciona bastante bien",
     "projectes_visibles": [
         {
+            "slug": "cosas-de-señoras",
+            "color": "#A5BFCC",
+            "visible": true
+        },
+        {
             "slug": "new-ywork",
             "color": "#96C9F4",
             "visible": true
