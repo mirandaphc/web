@@ -361,6 +361,7 @@ function setAboutOpen(isOpen, options = {}) {
   if (open) {
     finishClosing(false);
     aboutPanel.classList.add("open");
+    aboutPanel.scrollTop = 0;
     // Guardar el elemento con foco actual
     lastFocusedElement = document.activeElement;
 
