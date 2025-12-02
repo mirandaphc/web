@@ -22,11 +22,6 @@
             "visible": true
         },
         {
-            "slug": "monica-planes",
-            "color": "#E8988A",
-            "visible": true
-        },
-        {
             "slug": "blanca-arias",
             "color": "#FFC4C4",
             "visible": true
@@ -40,6 +35,11 @@
             "slug": "as-time-bends",
             "color": "#87BAC3",
             "visible": false
+        },
+           {
+            "slug": "monica-planes",
+            "color": "#E8988A",
+            "visible": true
         }
     ]
 }
