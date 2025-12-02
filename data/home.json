@@ -19,7 +19,7 @@
         {
             "slug": "monica-planes",
             "color": "#E8988A",
-            "visible": false
+            "visible": true
         },
         {
             "slug": "blanca-arias",

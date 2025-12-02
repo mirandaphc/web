@@ -3,11 +3,11 @@
     
     "primera_imatge": {
         "src": "images/monicaPlanes/1.webp",
-        "size": "100"
+        "size": "80"
     },
     "titol": {
-        "cat": "Construccions filials",
-        "es": "Construcciones filiales",
+        "cat": "Construccions filials. La formigonera i el ciment",
+        "es": "Construcciones filials. La formigonera i el ciment",
         "link": ""
     },
     "client": {
@@ -15,14 +15,14 @@
         "es": "Mònica Planes",
         "link": ""
     },
-    "data": "2024",
-    "text": {
-        "cat": [
-            "Projecte de disseny per a Monica Planes."
-        ],
-        "es": [
-            "Proyecto de diseño para Monica Planes."
-        ]
+    "data": "2020",
+   "text": {
+    "cat": [
+        "Disseny i maquetació del catàleg de l’exposició “Construccions filials. La formigonera i el ciment” de Mònica Planes a Can Felipa Arts Visuals. Amb textos de l'artista i de Lucia C. Pino. Projecte fet amb la Montse Arderiu i coordinat per la Clàudia Elies."
+    ],
+    "es": [
+        "Diseño y maquetación del catálogo de la exposición “Construccions filials. La formigonera i el ciment” de Mònica Planes en Can Felipa Arts Visuals. Con textos de la artista y de Lucía C. Pino. Proyecto hecho con Montse Arderiu y coordinado por Clàudia Elies."
+    ]
     },
     "imatges": [
         {
@@ -43,7 +43,7 @@
         },
         {
             "src": "images/monicaPlanes/6.webp",
-            "size": "100"
+            "size": "80"
         }
     ]
 }
