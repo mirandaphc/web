@@ -27,20 +27,24 @@
     },
     "imatges": [
         {
+            "src": "images/carnaval/uou.png",
+            "size": "100"
+        },
+        {
             "src": "images/carnaval/2.webp",
-            "size": "75"
+            "size": "100"
         },
         {
             "src": "images/carnaval/3.webp",
-            "size": "100"
+            "size": "80"
         },
          {
             "src": "images/carnaval/4.webp",
-            "size": "80"
+            "size": "100"
         },
         {
             "src": "images/carnaval/5.webp",
-            "size": "100"
+            "size": "80"
         }
     ]
 }
