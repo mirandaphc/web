@@ -1,7 +1,7 @@
 {
     "slug": "blanca-arias",
     "primera_imatge": {
-        "src": "images/blancaArias/1.jpg",
+        "src": "images/blancaArias/1.webp",
         "size": "100"
     },
     "titol": {
@@ -25,15 +25,15 @@
     },
     "imatges": [
         {
-            "src": "images/blancaArias/2.jpg",
+            "src": "images/blancaArias/2.webp",
             "size": "75"
         },
         {
-            "src": "images/blancaArias/3.jpg",
+            "src": "images/blancaArias/3.webp",
             "size": "100"
         },
         {
-            "src": "images/blancaArias/4.jpg",
+            "src": "images/blancaArias/4.webp",
             "size": "75"
         }
     ]

@@ -1,7 +1,7 @@
 {
     "slug": "cosas-de-señoras",
     "primera_imatge": {
-        "src": "images/cosasDeSeñoras/1.png",
+        "src": "images/cosasDeSeñoras/1.webp",
         "size": "100"
     },
     "titol": {
@@ -25,19 +25,19 @@
 },
     "imatges": [
         {
-            "src": "images/cosasDeSeñoras/2.png",
+            "src": "images/cosasDeSeñoras/2.webp",
             "size": "100"
         },
         {
-            "src": "images/cosasDeSeñoras/3.png",
+            "src": "images/cosasDeSeñoras/3.webp",
             "size": "100"
         },
         {
-            "src": "images/cosasDeSeñoras/5.png",
+            "src": "images/cosasDeSeñoras/5.webp",
             "size": "100"
         },
          {
-            "src": "images/cosasDeSeñoras/6.png",
+            "src": "images/cosasDeSeñoras/6.webp",
             "size": "100"
         }
         

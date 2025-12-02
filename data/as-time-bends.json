@@ -1,7 +1,7 @@
 {
     "slug": "as-time-bends",
     "primera_imatge": {
-        "src": "images/asTimeBends/1.png",
+        "src": "images/asTimeBends/1.webp",
         "size": "100"
     },
     "titol": {
@@ -27,11 +27,11 @@
     },
     "imatges": [
         {
-            "src": "images/asTimeBends/2.png",
+            "src": "images/asTimeBends/2.webp",
             "size": "75"
         },
         {
-            "src": "images/asTimeBends/3.png",
+            "src": "images/asTimeBends/3.webp",
             "size": "100"
         }
     ]
