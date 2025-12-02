@@ -7,6 +7,11 @@
     "_comment": "nota_de_curt en 35 funciona bastante bien",
     "projectes_visibles": [
         {
+            "slug": "carnaval",
+            "color": "#BB6464",
+            "visible": true
+        },
+        {
             "slug": "cosas-de-señoras",
             "color": "#A5BFCC",
             "visible": true
@@ -34,7 +39,7 @@
           {
             "slug": "as-time-bends",
             "color": "#87BAC3",
-            "visible": true
+            "visible": false
         }
     ]
 }

@@ -1,0 +1,46 @@
+{
+    "slug": "carnaval",
+    "primera_imatge": {
+        "src": "images/carnaval/1.webp",
+        "size": "100"
+    },
+    "titol": {
+        "cat": "CARNAVAL",
+        "es": "CARNAVAL",
+        "link": ""
+    },
+    "client": {
+        "cat": "Andrea Pérez-Hita",
+        "es": "Andrea Pérez-Hita",
+        "link": ""
+    },
+    "data": "2025",
+   "text": {
+    "cat": [
+        "**6508** Disseny i maquetació del fotollibre CARNAVAL, editat per 6508. Fotografies fetes per l’Andrea Pérez-Hita entre 2007 i 2013 a l’Escola Pere Vila. S’han fet totes les gestions possibles per identificar les persones que apareixen en la publicació. Si et reconeixes a CARNAVAL, posa’t en contacte amb nosaltres. Aquesta publicació no existiria sense l’ajuda de Lamiae Abassi, Pedro Attenborough, Simon Attenborough i Irene Ferrer-Mayol.",
+        "Es va fer una presentació de la publicació a la Llibreria Terranova el 9 de març de 2025, va ser molt bonic."
+    ],
+    "es": [
+        "**6508** Diseño y maquetación del fotolibro CARNAVAL, editado por 6508. Fotografías hechas por Andrea Pérez-Hita entre 2007 y 2013 en la Escola Pere Vila. Se han hecho todas las gestiones posibles para identificar a las personas que aparecen en la publicación. Si te reconoces en CARNAVAL, ponte en contacto con nosotros. Esta publicación no existiría sin la ayuda de Lamiae Abassi, Pedro Attenborough, Simon Attenborough e Irene Ferrer-Mayol.",
+        "Se hizo una presentación de la publicación en la Librería Terranova el 9 de marzo de 2025, fue muy bonito."
+    ]
+    },
+    "imatges": [
+        {
+            "src": "images/carnaval/2.webp",
+            "size": "75"
+        },
+        {
+            "src": "images/carnaval/3.webp",
+            "size": "100"
+        },
+         {
+            "src": "images/carnaval/4.webp",
+            "size": "80"
+        },
+        {
+            "src": "images/carnaval/5.webp",
+            "size": "100"
+        }
+    ]
+}
