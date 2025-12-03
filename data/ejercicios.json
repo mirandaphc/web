@@ -1,0 +1,52 @@
+{
+    "slug": "ejercicios",
+    "primera_imatge": {
+        "src": "images/ejercicios/00.png",
+        "size": "100"
+    },
+    "titol": {
+        "cat": "Ejercicios para ver a Dios",
+        "es": "Ejercicios para ver a Dios",
+        "link": ""
+    },
+    "client": {
+        "cat": "Miguel Ángel Blanca Pachón",
+        "es": "Miguel Ángel Blanca Pachón",
+        "link": ""
+    },
+    "data": "2025",
+    "text": {
+    "cat": [
+        "Disseny gràfic i crèdits de la pel·lícula “[Ejercicios para ver a Dios](https://www.boogaloofilms.com/projects/ejercicios-para-ver-a-dios/)” dirigida per Miguel Ángel Blanca i protagonitzada per Laia Cabrera Vicens, María García Vera i Mariona Naudin Lorda. Produida per Boogaloo Films."
+    ],
+    "es": [
+        "Diseño gráfico y créditos de la película “[Ejercicios para ver a Dios](https://www.boogaloofilms.com/projects/ejercicios-para-ver-a-dios/)” dirigida por Miguel Ángel Blanca y protagonizada por Laia Cabrera Vicens, María García Vera y Mariona Naudin Lorda. Producida por Boogaloo Films."
+    ]
+},
+    "imatges": [
+        {
+            "src": "images/ejercicios/1.png",
+            "size": "80"
+        },
+        {
+            "src": "images/ejercicios/2.png",
+            "size": "100"
+        },
+        {
+            "src": "images/ejercicios/3.png",
+            "size": "80"
+        },
+         {
+            "src": "images/ejercicios/4.png",
+            "size": "80"
+        },
+         {
+            "src": "images/ejercicios/5.png",
+            "size": "100"
+        },
+         {
+            "src": "images/ejercicios/6.png",
+            "size": "80"
+        }
+    ]
+}
