@@ -1,7 +1,7 @@
 {
     "slug": "carnaval",
     "primera_imatge": {
-        "src": "images/carnaval/1.webp",
+        "src": "images/carnaval/5.webp",
         "size": "100"
     },
     "titol": {
@@ -43,7 +43,7 @@
             "size": "100"
         },
         {
-            "src": "images/carnaval/5.webp",
+            "src": "images/carnaval/1.webp",
             "size": "80"
         }
     ]
