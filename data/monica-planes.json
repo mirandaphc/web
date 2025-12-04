@@ -2,8 +2,8 @@
     "slug": "monica-planes",
     
     "primera_imatge": {
-        "src": "images/monicaPlanes/1.webp",
-        "size": "80"
+        "src": "images/monicaPlanes/monic.jpg",
+        "size": "100"
     },
     "titol": {
         "cat": "Construccions filials. La formigonera i el ciment",
@@ -42,7 +42,7 @@
             "size": "100"
         },
         {
-            "src": "images/monicaPlanes/6.webp",
+            "src": "images/monicaPlanes/photo_5875424848031452120_y.jpg",
             "size": "80"
         }
     ]
