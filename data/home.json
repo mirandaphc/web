@@ -27,6 +27,11 @@
             "visible": true
         },
         {
+            "slug": "art-nou",
+            "color": "#FFECDB",
+            "visible": true
+        },
+        {
             "slug": "blanca-arias",
             "color": "#FFC4C4",
             "visible": true

@@ -1,0 +1,40 @@
+{
+    "slug": "art-nou",
+    "primera_imatge": {
+        "src": "images/artNou/1.png",
+        "size": "100"
+    },
+    "titol": {
+        "cat": "Art Nou 2024",
+        "es": "Art Nou 2024",
+        "link": ""
+    },
+    "client": {
+        "cat": "Festival d'Art Emergent de Barcelona i l'Hospitalet",
+        "es": "Festival d'Art Emergent de Barcelona i l'Hospitalet",
+        "link": ""
+    },
+    "data": "2024",
+   "text": {
+    "cat": [
+        "Comunicació gràfica per a [Art Nou](https://artnou.net/) 2024."
+    ],
+    "es": [
+        "Comunicación gráfica para [Art Nou](https://artnou.net/) 2024."
+    ]
+    },
+    "imatges": [
+        {
+            "src": "images/artNou/desplegableA.png",
+            "size": "100"
+        },
+        {
+            "src": "images/artNou/desblegableB.png",
+            "size": "100"
+        },
+        {
+            "src": "images/artNou/2.png",
+            "size": "100"
+        }
+    ]
+}
