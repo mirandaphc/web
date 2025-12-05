@@ -28,10 +28,14 @@
     "imatges": [
         {
             "src": "images/asTimeBends/2.webp",
-            "size": "75"
+            "size": "100"
         },
         {
             "src": "images/asTimeBends/3.webp",
+            "size": "90"
+        },
+        {
+            "src": "images/asTimeBends/6.webp",
             "size": "100"
         }
     ]

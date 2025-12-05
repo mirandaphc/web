@@ -37,15 +37,16 @@
             "visible": true
         },
         {
+            "slug": "as-time-bends",
+            "color": "#87BAC3",
+            "visible": true
+        },
+        {
             "slug": "dentro-caballo",
             "color": "#96A78D",
             "visible": true
         },
-          {
-            "slug": "as-time-bends",
-            "color": "#87BAC3",
-            "visible": false
-        },
+         
            {
             "slug": "monica-planes",
             "color": "#E8988A",
