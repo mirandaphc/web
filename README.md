@@ -46,8 +46,7 @@ mirandaperezhita/
     {
       "slug": "new-ywork",
       "color": "#748873",
-      "visible": true,
-      "autor": "miranda perez hita"
+      "visible": true
     }
   ]
 }
@@ -62,7 +61,7 @@ mirandaperezhita/
 ```json
 {
   "slug": "new-ywork",
-  "primera_imatge": { "src": "images/NY/1.jpg", "size": "100" },
+  "primera_imatge": { "src": "images/NY/1.webp", "size": "100" },
   "titol": { "cat": "New Ywork", "es": "New Ywork" },
   "client": { "cat": "Jaume Cloret", "es": "Jaume Cloret" },
   "data": "2024",
@@ -75,18 +74,31 @@ mirandaperezhita/
     ]
   },
   "imatges": [
-    { "src": "images/NY/2.jpg", "size": "50" }
+    { "src": "images/NY/2.webp", "size": "50", "w": 6355, "h": 7944 }
   ]
 }
 ```
 
 - `size` es un porcentaje 1–100 que se traduce a `--scale` dentro de la `media-frame`.
+- `w` / `h` son las dimensiones reales en píxeles de la imagen. Opcionales, pero recomendados: permiten que el navegador reserve el espacio antes de cargar la imagen, evitando saltos de layout.
 - Las claves de texto aceptan objeto por idioma: cada idioma puede ser string único o array de párrafos. El formateador (`formateador.html`) genera el array listo para pegar.
+
+## Deep links
+
+Cada proyecto tiene su URL directa usando el hash del slug:
+
+```
+https://mirandaperezhita.com/#carnaval
+https://mirandaperezhita.com/#ejercicios
+https://mirandaperezhita.com/#new-ywork
+```
+
+Al navegar por el portfolio el hash se actualiza solo (`history.replaceState`), sin añadir entradas al historial del navegador. Si se accede directamente a una URL con hash, la página hace scroll automático al proyecto correspondiente al cargar.
 
 ## Detalles de implementación
 
 - **Colores dinámicos**: `prepareProjectColorData()` convierte hex → RGB, calcula tono y mezcla con negro/blanco para obtener colores de texto con buen contraste. Con `nota_de_curt = 0` se mantiene la mezcla hacia negro, que actualmente funciona bien con la paleta.
-- **Imágenes**: `makeMediaFrame()` crea un contenedor con `aspect-ratio`. El ancho máximo es el tamaño natural de la imagen; por eso las imágenes pequeñas (como `images/monicaPlanes/1.jpeg`) quedan centradas sin escalar para evitar pixelado. Si se quisiera forzar a pantalla completa, se puede romper esa limitación y aceptar la pérdida de nitidez (ver notas en `todo.md`).
+- **Imágenes**: `makeMediaFrame()` crea un contenedor con `aspect-ratio`. El ancho máximo es el tamaño natural de la imagen; por eso las imágenes pequeñas (como `images/monicaPlanes/3.webp`) quedan centradas sin escalar para evitar pixelado. Si se quisiera forzar a pantalla completa, se puede romper esa limitación y aceptar la pérdida de nitidez (ver notas en `todo.md`).
 - **Panel About**: contenido se genera desde `data/about.json`. El botón del sidebar siempre se ve en negro (override directo en CSS) para mantener referencia estable.
 - **Accesibilidad básica**: el botón activo de proyecto usa `aria-current="true"`, el panel About alterna `aria-hidden`/`aria-expanded`, y `Esc` cierra el overlay.
 

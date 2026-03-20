@@ -14,11 +14,14 @@ let lastSidebarHeight = 0;
 let lastFocusedElement = null;
 let aboutCloseTimerId = null;
 let aboutTransitionHandler = null;
+let scrollCorrectionTarget = null;
+let scrollCorrectionTimer = null;
 
 const PASSIVE_SCROLL_OPTIONS = { passive: true };
 const DEFAULT_TEXT_COLOR = "#000000";
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000; // 1 segundo
+const ABOUT_FALLBACK_TEXT = "about no disponible";
 
 // Elementos del DOM
 const sidebar = document.getElementById("sidebar");
@@ -36,7 +39,7 @@ function setupSidebarHeight() {
   }
 
   applySidebarHeight();
-  if (window.innerWidth >= 600 || !sidebar) return;
+  if (window.innerWidth >= 768 || !sidebar) return;
 
   // Observar cambios futuros (ej: cambio de idioma)
   if ("ResizeObserver" in window) {
@@ -52,7 +55,7 @@ function setupSidebarHeight() {
 
 function applySidebarHeight() {
   // Solo en móvil
-  if (window.innerWidth >= 600 || !sidebar) {
+  if (window.innerWidth >= 768 || !sidebar) {
     document.documentElement.style.removeProperty("--sidebar-actual-height");
     lastSidebarHeight = 0;
     return;
@@ -79,6 +82,14 @@ function debounce(fn, delay = 150) {
     clearTimeout(t);
     t = setTimeout(() => fn(...args), delay);
   };
+}
+
+function prefersReducedMotion() {
+  return (
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
 }
 
 function updateSafeAreaVars() {
@@ -165,6 +176,19 @@ async function init() {
     renderProjectMenu();
     renderProjects();
 
+    // Navegar al proyecto del hash inicial si existe
+    const hashSlug = getSlugFromHash();
+    if (hashSlug && document.getElementById(`project-${hashSlug}`)) {
+      // Esperar un frame para que el layout esté calculado
+      requestAnimationFrame(() => {
+        const el = document.getElementById(`project-${hashSlug}`);
+        if (!el || !projectsContainer) return;
+        const offset = getElementOffsetInContainer(el, projectsContainer);
+        projectsContainer.scrollTo({ top: offset, behavior: "auto" });
+        setActiveProject(hashSlug, { scrollIntoView: false });
+      });
+    }
+
     updateSafeAreaVars();
     setupSidebarHeight();
 
@@ -235,7 +259,9 @@ async function loadAbout() {
     renderAbout();
   } catch (e) {
     console.warn("No se pudo cargar about.json:", e);
-    // silencioso: si no existe o falla, no bloquear la aplicación
+    // fallback visible si no existe o falla
+    aboutData = null;
+    renderAbout();
   }
 }
 
@@ -268,11 +294,12 @@ function renderAbout() {
   body.className = "about-body";
 
   const h2 = document.createElement("h2");
-  h2.textContent = "";
+  h2.textContent = "miranda perez hita";
   body.appendChild(h2);
 
   const paragraphs = getLocalizedParagraphs(aboutData?.text, activeLanguage);
-  paragraphs.forEach((text) => {
+  const aboutParagraphs = paragraphs.length ? paragraphs : [ABOUT_FALLBACK_TEXT];
+  aboutParagraphs.forEach((text) => {
     const p = document.createElement("p");
     p.innerHTML = formatInline(text); // soporta **, *, __, [texto](url)
     body.appendChild(p);
@@ -662,7 +689,7 @@ async function loadProjects(projects) {
   );
 }
 
-function makeMediaFrame(src, alt = "", scale = 100) {
+function makeMediaFrame(src, alt = "", scale = 100, meta = null) {
   const frame = document.createElement("div");
   frame.className = "media-frame";
 
@@ -673,17 +700,27 @@ function makeMediaFrame(src, alt = "", scale = 100) {
   // Mejora #6: Optimización de carga de imágenes
   img.loading = "lazy";
   img.decoding = "async";
-  const FALLBACK_SRC = "images/reference/pasted_file_KN2lG4_MacBookAir-1.png";
+  const FALLBACK_SRC = "images/reference/imagen-no-disponible.svg";
 
   const scaleValue =
     Math.max(1, Math.min(100, parseInt(scale, 10) || 100)) / 100;
   img.style.setProperty("--scale", scaleValue.toString());
+
+  // Si hay dimensiones pre-calculadas en el JSON, aplicar ratio inmediatamente
+  if (meta?.w && meta?.h) {
+    frame.style.setProperty("--natural-w", meta.w + "px");
+    frame.style.setProperty("--ratio", `${meta.w} / ${meta.h}`);
+  }
 
   const setVars = () => {
     const w = img.naturalWidth || 1;
     const h = img.naturalHeight || 1;
     frame.style.setProperty("--natural-w", w + "px");
     frame.style.setProperty("--ratio", `${w} / ${h}`);
+    // Corrección event-driven: si hay un scroll target activo, corregir posición
+    if (scrollCorrectionTarget) {
+      correctScrollToElement(scrollCorrectionTarget);
+    }
   };
 
   if (img.complete && img.naturalWidth) {
@@ -837,7 +874,7 @@ function renderProjects() {
     const heroMeta = projectData.primera_imatge;
     if (heroMeta?.src) {
       const heroScale = heroMeta.size ?? 100;
-      const hero = makeMediaFrame(heroMeta.src, projectTitle, heroScale);
+      const hero = makeMediaFrame(heroMeta.src, projectTitle, heroScale, heroMeta);
       hero.classList.add("hero");
       content.appendChild(hero);
     }
@@ -857,7 +894,7 @@ function renderProjects() {
 
     images.forEach((imgMeta) => {
       if (!imgMeta || !imgMeta.src) return;
-      const item = makeMediaFrame(imgMeta.src, projectTitle, imgMeta.size);
+      const item = makeMediaFrame(imgMeta.src, projectTitle, imgMeta.size, imgMeta);
       gallery.appendChild(item);
     });
 
@@ -884,13 +921,58 @@ function getVisibleProjects() {
   return getVisibleProjectsFromHome();
 }
 
+function getElementOffsetInContainer(el, container) {
+  const elRect = el.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+  let offset = container.scrollTop + (elRect.top - containerRect.top);
+  const scrollMargin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+  offset -= scrollMargin;
+  return Math.max(0, offset);
+}
+
+function correctScrollToElement(el) {
+  if (!el || !projectsContainer) return;
+  const targetOffset = getElementOffsetInContainer(el, projectsContainer);
+  if (Math.abs(targetOffset - projectsContainer.scrollTop) > 5) {
+    projectsContainer.scrollTo({ top: targetOffset, behavior: "auto" });
+  }
+}
+
 // Scroll suave a un proyecto
 function scrollToProject(slug) {
   const element = document.getElementById(`project-${slug}`);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
-    setActiveProject(slug);
+  if (!element) return;
+
+  setActiveProject(slug);
+
+  // Activar corrección event-driven mientras cargan imágenes
+  scrollCorrectionTarget = element;
+  if (scrollCorrectionTimer) clearTimeout(scrollCorrectionTimer);
+  scrollCorrectionTimer = setTimeout(() => {
+    scrollCorrectionTarget = null;
+    scrollCorrectionTimer = null;
+  }, 5000);
+
+  // Scroll programático al offset calculado
+  const targetOffset = getElementOffsetInContainer(element, projectsContainer);
+  const behavior = prefersReducedMotion() ? "auto" : "smooth";
+  projectsContainer.scrollTo({ top: targetOffset, behavior });
+}
+
+// Actualizar el hash de la URL sin añadir entrada al historial
+function updateUrlHash(slug) {
+  if (!slug || typeof history === "undefined") return;
+  const newHash = `#${slug}`;
+  if (location.hash !== newHash) {
+    history.replaceState(null, "", newHash);
   }
+}
+
+// Leer el hash inicial de la URL y devolver el slug si existe
+function getSlugFromHash() {
+  const hash = location.hash;
+  if (!hash || hash.length < 2) return null;
+  return hash.slice(1); // quitar el '#'
 }
 
 function setActiveProject(slug, options = {}) {
@@ -938,13 +1020,18 @@ function setActiveProject(slug, options = {}) {
   activeProjectSlug = targetSlug;
   applyNavColorForSlug(targetSlug);
 
+  if (slugChanged) {
+    updateUrlHash(targetSlug);
+  }
+
   if (activeButton && (forceScroll || (scrollIntoView && slugChanged))) {
     const shouldScrollMenu = projectMenu.scrollWidth > projectMenu.clientWidth;
     if (shouldScrollMenu) {
       // Mejorar el scroll en móvil con un pequeño delay
       requestAnimationFrame(() => {
+        const behavior = prefersReducedMotion() ? "auto" : "smooth";
         activeButton.scrollIntoView({
-          behavior: "smooth",
+          behavior,
           block: "nearest",
           inline: "center",
         });

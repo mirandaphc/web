@@ -117,7 +117,7 @@ body.about-open #projects-container {
   text-decoration: none;
   -webkit-appearance: none;
   appearance: none;
-  color: #232323;
+  color: #000000;
 }
 
 .about-btn.active {
@@ -220,8 +220,8 @@ body.about-open #projects-container {
   text-underline-offset: var(--underline-offset);
 }
 
-/* Responsive: 600-1000px */
-@media (min-width: 600px) and (max-width: 1000px) {
+/* Responsive: 768-1000px */
+@media (min-width: 768px) and (max-width: 1000px) {
   #sidebar {
     width: 25%;
   }
@@ -231,8 +231,8 @@ body.about-open #projects-container {
   }
 }
 
-/* Mobile: <600px */
-@media (max-width: 599px) {
+/* Mobile: <768px */
+@media (max-width: 767px) {
   body {
     display: block;
     position: fixed;
@@ -355,7 +355,7 @@ body.about-open #projects-container {
   display: block;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 767px) {
   .media-frame {
     width: 100%;
   }
@@ -482,7 +482,7 @@ body.about-open #projects-container {
 }
 
 /* Mobile: about panel desde abajo como lengüeta */
-@media (max-width: 599px) {
+@media (max-width: 767px) {
   .about-panel {
     /* Ocupa desde el sidebar hasta abajo */
     left: 0;
@@ -511,7 +511,7 @@ body.about-open #projects-container {
 }
 
 /* Tablet: ajustar left según ancho del sidebar */
-@media (min-width: 600px) and (max-width: 1000px) {
+@media (min-width: 768px) and (max-width: 1000px) {
   .about-panel {
     left: 25%;
   }
@@ -535,4 +535,18 @@ body.about-open #projects-container {
 .project-info a:hover,
 .project-text a:hover {
   animation: blink-underline 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }

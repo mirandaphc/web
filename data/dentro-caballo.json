@@ -2,7 +2,9 @@
     "slug": "dentro-caballo",
     "primera_imatge": {
         "src": "images/dentroCaballo/1.webp",
-        "size": "100"
+        "size": "100",
+        "w": 1981,
+        "h": 1416
     },
     "titol": {
         "cat": "Cenar dentro de un caballo / *Cenare all'interno di un cavallo*",
@@ -26,11 +28,15 @@
     "imatges": [
         {
             "src": "images/dentroCaballo/2.webp",
-            "size": "75"
+            "size": "75",
+            "w": 1982,
+            "h": 1415
         },
         {
             "src": "images/dentroCaballo/3.webp",
-            "size": "100"
+            "size": "100",
+            "w": 1986,
+            "h": 1415
         }
     ]
 }

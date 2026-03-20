@@ -2,7 +2,9 @@
     "slug": "cosas-de-señoras",
     "primera_imatge": {
         "src": "images/cosasDeSeñoras/1.webp",
-        "size": "100"
+        "size": "100",
+        "w": 2000,
+        "h": 1115
     },
     "titol": {
         "cat": "Cosas de señoras y otros poemas",
@@ -26,19 +28,27 @@
     "imatges": [
         {
             "src": "images/cosasDeSeñoras/2.webp",
-            "size": "100"
+            "size": "100",
+            "w": 2000,
+            "h": 1433
         },
         {
             "src": "images/cosasDeSeñoras/3.webp",
-            "size": "100"
+            "size": "100",
+            "w": 2000,
+            "h": 1433
         },
         {
             "src": "images/cosasDeSeñoras/5.webp",
-            "size": "100"
+            "size": "100",
+            "w": 2000,
+            "h": 1433
         },
          {
             "src": "images/cosasDeSeñoras/6.webp",
-            "size": "100"
+            "size": "100",
+            "w": 2000,
+            "h": 1046
         }
         
     ]

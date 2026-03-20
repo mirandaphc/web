@@ -1,8 +1,10 @@
 {
     "slug": "art-nou",
     "primera_imatge": {
-        "src": "images/artNou/1.png",
-        "size": "100"
+        "src": "images/artNou/1.webp",
+        "size": "100",
+        "w": 2880,
+        "h": 1718
     },
     "titol": {
         "cat": "Art Nou 2024",
@@ -25,16 +27,22 @@
     },
     "imatges": [
         {
-            "src": "images/artNou/desplegableA.png",
-            "size": "100"
+            "src": "images/artNou/desplegableA.webp",
+            "size": "100",
+            "w": 6215,
+            "h": 4259
         },
         {
-            "src": "images/artNou/desblegableB.png",
-            "size": "100"
+            "src": "images/artNou/desblegableB.webp",
+            "size": "100",
+            "w": 6150,
+            "h": 4272
         },
         {
-            "src": "images/artNou/2.png",
-            "size": "100"
+            "src": "images/artNou/2.webp",
+            "size": "100",
+            "w": 1355,
+            "h": 427
         }
     ]
 }

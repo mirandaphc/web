@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title">
+  <title id="title">Imagen no disponible</title>
+  <rect width="1600" height="900" fill="#f0ede6"/>
+
+  <!-- Thin border frame -->
+  <rect x="60" y="60" width="1480" height="780" fill="none" stroke="#c8c2b8" stroke-width="1"/>
+
+  <!-- Corner marks -->
+  <line x1="60" y1="60" x2="110" y2="60" stroke="#a09a92" stroke-width="1.5"/>
+  <line x1="60" y1="60" x2="60" y2="110" stroke="#a09a92" stroke-width="1.5"/>
+  <line x1="1540" y1="60" x2="1490" y2="60" stroke="#a09a92" stroke-width="1.5"/>
+  <line x1="1540" y1="60" x2="1540" y2="110" stroke="#a09a92" stroke-width="1.5"/>
+  <line x1="60" y1="840" x2="110" y2="840" stroke="#a09a92" stroke-width="1.5"/>
+  <line x1="60" y1="840" x2="60" y2="790" stroke="#a09a92" stroke-width="1.5"/>
+  <line x1="1540" y1="840" x2="1490" y2="840" stroke="#a09a92" stroke-width="1.5"/>
+  <line x1="1540" y1="840" x2="1540" y2="790" stroke="#a09a92" stroke-width="1.5"/>
+
+  <!-- Broken image icon — thin strokes, centered -->
+  <g transform="translate(800,420)" fill="none" stroke="#b5afa8" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Outer frame -->
+    <rect x="-88" y="-66" width="176" height="132" rx="4"/>
+    <!-- Mountain / landscape line -->
+    <polyline points="-88,38 -38,-18 12,22 56,-10 88,38"/>
+    <!-- Sun / circle -->
+    <circle cx="50" cy="-28" r="18"/>
+    <!-- Diagonal crack suggesting broken -->
+    <line x1="-20" y1="-66" x2="8" y2="-18" stroke-dasharray="4 3"/>
+    <line x1="8" y1="-18" x2="-8" y2="20" stroke-dasharray="4 3"/>
+  </g>
+
+  <!-- Text -->
+  <text
+    x="800"
+    y="556"
+    text-anchor="middle"
+    fill="#a09a92"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="18"
+    letter-spacing="3"
+    font-style="italic"
+  >imagen no disponible</text>
+</svg>

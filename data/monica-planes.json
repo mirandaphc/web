@@ -1,9 +1,10 @@
 {
     "slug": "monica-planes",
-    
     "primera_imatge": {
-        "src": "images/monicaPlanes/monic.jpg",
-        "size": "100"
+        "src": "images/monicaPlanes/monic.webp",
+        "size": "100",
+        "w": 2000,
+        "h": 1601
     },
     "titol": {
         "cat": "Construccions filials. La formigonera i el ciment",
@@ -16,34 +17,44 @@
         "link": ""
     },
     "data": "2020",
-   "text": {
-    "cat": [
-        "Disseny i maquetació del catàleg de l’exposició “Construccions filials. La formigonera i el ciment” de Mònica Planes a Can Felipa Arts Visuals. Amb textos de l'artista i de Lucia C. Pino. Projecte fet amb la Montse Arderiu i coordinat per la Clàudia Elies."
-    ],
-    "es": [
-        "Diseño y maquetación del catálogo de la exposición “Construccions filials. La formigonera i el ciment” de Mònica Planes en Can Felipa Arts Visuals. Con textos de la artista y de Lucía C. Pino. Proyecto hecho con Montse Arderiu y coordinado por Clàudia Elies."
-    ]
+    "text": {
+        "cat": [
+            "Disseny i maquetació del catàleg de l’exposició “Construccions filials. La formigonera i el ciment” de Mònica Planes a Can Felipa Arts Visuals. Amb textos de l'artista i de Lucia C. Pino. Projecte fet amb la Montse Arderiu i coordinat per la Clàudia Elies."
+        ],
+        "es": [
+            "Diseño y maquetación del catálogo de la exposición “Construccions filials. La formigonera i el ciment” de Mònica Planes en Can Felipa Arts Visuals. Con textos de la artista y de Lucía C. Pino. Proyecto hecho con Montse Arderiu y coordinado por Clàudia Elies."
+        ]
     },
     "imatges": [
         {
             "src": "images/monicaPlanes/2.webp",
-            "size": "100"
+            "size": "100",
+            "w": 1628,
+            "h": 1206
         },
         {
             "src": "images/monicaPlanes/3.webp",
-            "size": "100"
+            "size": "100",
+            "w": 1080,
+            "h": 700
         },
         {
             "src": "images/monicaPlanes/4.webp",
-            "size": "100"
+            "size": "100",
+            "w": 1622,
+            "h": 1220
         },
         {
             "src": "images/monicaPlanes/5.webp",
-            "size": "100"
+            "size": "100",
+            "w": 1624,
+            "h": 1248
         },
         {
-            "src": "images/monicaPlanes/photo_5875424848031452120_y.jpg",
-            "size": "80"
+            "src": "images/monicaPlanes/photo_5875424848031452120_y.webp",
+            "size": "80",
+            "w": 1280,
+            "h": 960
         }
     ]
 }

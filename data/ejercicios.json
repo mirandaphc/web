@@ -1,8 +1,10 @@
 {
     "slug": "ejercicios",
     "primera_imatge": {
-        "src": "images/ejercicios/00.png",
-        "size": "100"
+        "src": "images/ejercicios/00.webp",
+        "size": "100",
+        "w": 2880,
+        "h": 1800
     },
     "titol": {
         "cat": "Ejercicios para ver a Dios",
@@ -16,37 +18,49 @@
     },
     "data": "2025",
     "text": {
-    "cat": [
-        "Disseny gràfic i crèdits de la pel·lícula “[Ejercicios para ver a Dios](https://www.boogaloofilms.com/projects/ejercicios-para-ver-a-dios/)” dirigida per Miguel Ángel Blanca i protagonitzada per Laia Cabrera Vicens, María García Vera i Mariona Naudin Lorda. Produida per Boogaloo Films."
-    ],
-    "es": [
-        "Diseño gráfico y créditos de la película “[Ejercicios para ver a Dios](https://www.boogaloofilms.com/projects/ejercicios-para-ver-a-dios/)” dirigida por Miguel Ángel Blanca y protagonizada por Laia Cabrera Vicens, María García Vera y Mariona Naudin Lorda. Producida por Boogaloo Films."
-    ]
-},
+        "cat": [
+            "Disseny gràfic i crèdits de la pel·lícula “[Ejercicios para ver a Dios](https://www.boogaloofilms.com/projects/ejercicios-para-ver-a-dios/)” dirigida per Miguel Ángel Blanca i protagonitzada per Laia Cabrera Vicens, María García Vera i Mariona Naudin Lorda. Produida per Boogaloo Films."
+        ],
+        "es": [
+            "Diseño gráfico y créditos de la película “[Ejercicios para ver a Dios](https://www.boogaloofilms.com/projects/ejercicios-para-ver-a-dios/)” dirigida por Miguel Ángel Blanca y protagonizada por Laia Cabrera Vicens, María García Vera y Mariona Naudin Lorda. Producida por Boogaloo Films."
+        ]
+    },
     "imatges": [
         {
-            "src": "images/ejercicios/1.png",
-            "size": "80"
+            "src": "images/ejercicios/1.webp",
+            "size": "80",
+            "w": 2560,
+            "h": 1600
         },
         {
-            "src": "images/ejercicios/2.png",
-            "size": "100"
+            "src": "images/ejercicios/2.webp",
+            "size": "100",
+            "w": 2550,
+            "h": 1594
         },
         {
-            "src": "images/ejercicios/3.png",
-            "size": "80"
+            "src": "images/ejercicios/3.webp",
+            "size": "80",
+            "w": 2880,
+            "h": 1800
         },
-         {
-            "src": "images/ejercicios/4.png",
-            "size": "80"
+        {
+            "src": "images/ejercicios/4.webp",
+            "size": "80",
+            "w": 2880,
+            "h": 1800
         },
-         {
-            "src": "images/ejercicios/5.png",
-            "size": "100"
+        {
+            "src": "images/ejercicios/5.webp",
+            "size": "100",
+            "w": 2880,
+            "h": 1800
         },
-         {
-            "src": "images/ejercicios/6.png",
-            "size": "80"
+        {
+            "src": "images/ejercicios/6.webp",
+            "size": "80",
+            "w": 2880,
+            "h": 1800
         }
     ]
 }

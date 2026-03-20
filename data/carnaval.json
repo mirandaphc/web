@@ -2,7 +2,9 @@
     "slug": "carnaval",
     "primera_imatge": {
         "src": "images/carnaval/5.webp",
-        "size": "100"
+        "size": "100",
+        "w": 2000,
+        "h": 1501
     },
     "titol": {
         "cat": "Carnaval",
@@ -17,7 +19,7 @@
     "data": "2025",
    "text": {
     "cat": [
-        "**6508** Disseny i maquetació del fotollibre CARNAVAL, editat per 6508. Fotografies fetes per l’Andrea Pérez-Hita entre 2007 i 2013 a l’Escola Pere Vila. S’han fet totes les gestions possibles per identificar les persones que apareixen en la publicació. Si et reconeixes a CARNAVAL, posa’t en contacte amb nosaltres. Aquesta publicació no existiria sense l’ajuda de Lamiae Abassi, Pedro Attenborough, Simon Attenborough i Irene Ferrer-Mayol.",
+        "**6508** Disseny i maquetació del fotollibre CARNAVAL, editat per 6508. Fotografies fetes per l'Andrea Pérez-Hita entre 2007 i 2013 a l'Escola Pere Vila. S'han fet totes les gestions possibles per identificar les persones que apareixen en la publicació. Si et reconeixes a CARNAVAL, posa't en contacte amb nosaltres. Aquesta publicació no existiria sense l'ajuda de Lamiae Abassi, Pedro Attenborough, Simon Attenborough i Irene Ferrer-Mayol.",
         "Es va fer una presentació de la publicació a la Llibreria Terranova el 9 de març de 2025, va ser molt bonic."
     ],
     "es": [
@@ -27,24 +29,34 @@
     },
     "imatges": [
         {
-            "src": "images/carnaval/uou.png",
-            "size": "100"
+            "src": "images/carnaval/uou.webp",
+            "size": "100",
+            "w": 3282,
+            "h": 1232
         },
         {
             "src": "images/carnaval/2.webp",
-            "size": "100"
+            "size": "100",
+            "w": 2000,
+            "h": 1500
         },
         {
             "src": "images/carnaval/3.webp",
-            "size": "80"
+            "size": "80",
+            "w": 2000,
+            "h": 1500
         },
          {
             "src": "images/carnaval/4.webp",
-            "size": "100"
+            "size": "100",
+            "w": 2000,
+            "h": 1500
         },
         {
             "src": "images/carnaval/1.webp",
-            "size": "80"
+            "size": "80",
+            "w": 2000,
+            "h": 1500
         }
     ]
 }
