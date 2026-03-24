@@ -50,11 +50,6 @@ body {
   height: 100%;
 }
 
-html.about-open,
-body.about-open {
-  overflow: hidden;
-}
-
 body.about-open #projects-container {
   overflow: hidden;
   pointer-events: none;
@@ -96,7 +91,6 @@ body.about-open #projects-container {
   text-underline-offset: var(--underline-offset);
   transition: text-decoration-color 0.2s ease;
   color: inherit;
-  -webkit-appearance: none;
   appearance: none;
 }
 
@@ -115,7 +109,6 @@ body.about-open #projects-container {
   font-weight: normal;
   transition: font-weight 0.2s;
   text-decoration: none;
-  -webkit-appearance: none;
   appearance: none;
   color: #000000;
 }
@@ -140,7 +133,6 @@ body.about-open #projects-container {
   text-underline-offset: var(--underline-offset);
   transition: text-decoration-color 0.2s ease;
   color: inherit;
-  -webkit-appearance: none;
   appearance: none;
 }
 
@@ -158,10 +150,7 @@ body.about-open #projects-container {
   overflow-y: auto;
   scroll-behavior: smooth;
   padding-bottom: var(--safe-bottom);
-  /* Optimización para scroll en iOS */
-  -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: none;
-  /* Performance */
   will-change: scroll-position;
   transform: translateZ(0);
 }
@@ -235,8 +224,6 @@ body.about-open #projects-container {
 @media (max-width: 767px) {
   body {
     display: block;
-    position: fixed;
-    overflow: hidden;
   }
 
   #sidebar {
@@ -255,11 +242,6 @@ body.about-open #projects-container {
     padding-left: calc(1.5rem + var(--safe-left));
     overflow-y: auto;
     overflow-x: hidden;
-    /* Performance */
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
     background-color: var(--home-bg-color);
   }
 
@@ -274,10 +256,7 @@ body.about-open #projects-container {
     padding-top: var(--sidebar-actual-height);
     overflow-y: auto;
     overflow-x: hidden;
-    /* Transición suave cuando cambia el viewport */
     transition: padding-top 150ms ease-out;
-    /* Optimización para iOS */
-    -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: none;
   }
 
@@ -294,7 +273,6 @@ body.about-open #projects-container {
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
     scroll-snap-type: x proximity;
     padding-bottom: 0.5rem;
     margin-top: 2rem;
@@ -387,10 +365,6 @@ body.about-open #projects-container {
   justify-content: flex-start;
   /* Performance */
   will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  /* Optimización para iOS */
-  -webkit-overflow-scrolling: touch;
 }
 
 .about-panel.open,
@@ -417,7 +391,9 @@ body.about-open #projects-container {
   line-height: 1.45;
   font-size: 1rem;
   padding-top: 0.75rem;
-  padding-bottom: 3rem;
+  /* Centrado vertical en desktop: margin auto centra cuando hay espacio, scroll normal cuando no */
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .about-body {
@@ -453,11 +429,12 @@ body.about-open #projects-container {
 .about-footer {
   margin-top: 5rem;
   text-align: center;
+  font-size: 0.75rem;
+  opacity: 0.4;
 }
 
 .about-footer a {
-  text-decoration: underline;
-  text-underline-offset: var(--underline-offset);
+  text-decoration: none;
 }
 
 .about-close {
@@ -472,7 +449,6 @@ body.about-open #projects-container {
   cursor: pointer;
   padding: 0.5rem;
   z-index: 70;
-  -webkit-appearance: none;
   appearance: none;
 }
 
@@ -491,7 +467,7 @@ body.about-open #projects-container {
     bottom: 0;
     padding: calc(2.25rem + var(--safe-top))
       calc(1.5rem + var(--safe-right))
-      calc(2.5rem + var(--safe-bottom))
+      var(--safe-bottom)
       calc(1.5rem + var(--safe-left));
     /* Animación desde abajo */
     transform: translateY(100%);
@@ -506,7 +482,9 @@ body.about-open #projects-container {
   .about-content {
     width: min(92vw, 32rem);
     padding-top: 1.25rem;
-    padding-bottom: 3.5rem;
+    padding-bottom: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 

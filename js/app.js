@@ -16,6 +16,8 @@ let aboutCloseTimerId = null;
 let aboutTransitionHandler = null;
 let scrollCorrectionTarget = null;
 let scrollCorrectionTimer = null;
+let escCloseHandler = null;
+let firstProjectSlug = null;
 
 const PASSIVE_SCROLL_OPTIONS = { passive: true };
 const DEFAULT_TEXT_COLOR = "#000000";
@@ -172,20 +174,26 @@ async function init() {
     const visibleProjects = getVisibleProjectsFromHome();
     await loadProjects(visibleProjects);
 
+    // Guardar hash inicial antes de que renderProjectMenu lo sobreescriba
+    const initialHashSlug = getSlugFromHash();
+
     // Renderizar interfaz
     renderProjectMenu();
     renderProjects();
 
-    // Navegar al proyecto del hash inicial si existe
-    const hashSlug = getSlugFromHash();
-    if (hashSlug && document.getElementById(`project-${hashSlug}`)) {
-      // Esperar un frame para que el layout esté calculado
+    // Navegar al proyecto del hash inicial (solo si no es el primer proyecto)
+    const hashSlug = initialHashSlug;
+    if (hashSlug && hashSlug !== firstProjectSlug && document.getElementById(`project-${hashSlug}`)) {
+      // Desactivar smooth scroll temporalmente para saltar sin animación
+      projectsContainer.style.scrollBehavior = "auto";
       requestAnimationFrame(() => {
         const el = document.getElementById(`project-${hashSlug}`);
         if (!el || !projectsContainer) return;
         const offset = getElementOffsetInContainer(el, projectsContainer);
-        projectsContainer.scrollTo({ top: offset, behavior: "auto" });
+        projectsContainer.scrollTop = offset;
         setActiveProject(hashSlug, { scrollIntoView: false });
+        // Restaurar smooth scroll
+        projectsContainer.style.scrollBehavior = "";
       });
     }
 
@@ -293,9 +301,14 @@ function renderAbout() {
   const body = document.createElement("div");
   body.className = "about-body";
 
-  const h2 = document.createElement("h2");
-  h2.textContent = "miranda perez hita";
-  body.appendChild(h2);
+  // Renderizar imágenes del about (si hay)
+  const aboutImages = aboutData?.imatges;
+  if (Array.isArray(aboutImages) && aboutImages.length) {
+    aboutImages.forEach((imgMeta) => {
+      const frame = makeMediaFrame(imgMeta.src, "about", imgMeta.size, imgMeta);
+      body.appendChild(frame);
+    });
+  }
 
   const paragraphs = getLocalizedParagraphs(aboutData?.text, activeLanguage);
   const aboutParagraphs = paragraphs.length ? paragraphs : [ABOUT_FALLBACK_TEXT];
@@ -310,10 +323,10 @@ function renderAbout() {
   const footer = document.createElement("div");
   footer.className = "about-footer";
   const footerLink = document.createElement("a");
-  footerLink.href = "https://meowrhino.github.io/becasDigMeow/";
+  footerLink.href = "https://meowrhino.studio";
   footerLink.target = "_blank";
   footerLink.rel = "noopener noreferrer";
-  footerLink.textContent = "web: meowrhino";
+  footerLink.textContent = "meowrhino.studio";
   footer.appendChild(footerLink);
 
   wrap.appendChild(footer);
@@ -552,20 +565,11 @@ function prepareProjectColorData() {
     const isLight = tone >= threshold;
     project.nota_de_curt = isLight;
 
-    // Si el color es claro, mezclamos con negro para tener más contraste; si es oscuro, mezclamos con blanco.
-    const targetRgb = isLight
-      ? { r: 0, g: 0, b: 0 }
-      : { r: 255, g: 255, b: 255 };
-    const targetRgbForNav = targetRgb;
-    const mixedForNav = mixRgb(rgb, targetRgbForNav, 0.5);
-    const navHex = rgbToHex(mixedForNav);
-    project.color_texto = navHex;
-
-    const navRgb = hexToRgb(navHex);
-    const mixedForProject = navRgb
-      ? mixRgb(navRgb, targetRgb, 0.5)
-      : mixRgb(rgb, targetRgb, 0.75);
-    project.color_texto_proyecto = rgbToHex(mixedForProject);
+    // Si el color es claro, mezclamos con negro para más contraste; si es oscuro, con blanco.
+    const targetRgb = isLight ? { r: 0, g: 0, b: 0 } : { r: 255, g: 255, b: 255 };
+    const navRgb = mixRgb(rgb, targetRgb, 0.5);
+    project.color_texto = rgbToHex(navRgb);
+    project.color_texto_proyecto = rgbToHex(mixRgb(navRgb, targetRgb, 0.5));
 
     homeProjectsBySlug.set(project.slug, project);
   });
@@ -650,9 +654,7 @@ function applyNavColorForSlug(slug) {
 
 function updateSidebarColor() {
   const colors = homeData?.home_colors || {};
-  const fallback =
-    typeof homeData?.color_fons === "string" ? homeData.color_fons : "#ffffff";
-  const bgColor = colors[activeLanguage] ?? colors.cat ?? fallback;
+  const bgColor = colors[activeLanguage] ?? colors.cat ?? "#ffffff";
   document.documentElement.style.setProperty("--home-bg-color", bgColor);
   if (sidebar) {
     sidebar.style.backgroundColor = bgColor;
@@ -812,7 +814,8 @@ function renderProjectMenu() {
     projectMenu.appendChild(button);
   });
 
-  const fallbackSlug = activeProjectSlug ?? visibleProjects[0]?.slug ?? null;
+  firstProjectSlug = visibleProjects[0]?.slug ?? null;
+  const fallbackSlug = activeProjectSlug ?? firstProjectSlug;
   if (fallbackSlug) {
     setActiveProject(fallbackSlug, { scrollIntoView: false });
   }
@@ -1257,13 +1260,15 @@ function setupEventListeners() {
     );
     aboutToggle.addEventListener("click", toggleAbout);
 
-    const handleEscClose = (event) => {
+    if (escCloseHandler) {
+      document.removeEventListener("keydown", escCloseHandler);
+    }
+    escCloseHandler = (event) => {
       if (event.key === "Escape" && aboutPanel.classList.contains("open")) {
         setAboutOpen(false, { focusToggle: true });
       }
     };
-
-    document.addEventListener("keydown", handleEscClose);
+    document.addEventListener("keydown", escCloseHandler);
   }
 
   // Prevenir comportamiento extraño en iOS durante scroll horizontal del menú

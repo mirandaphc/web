@@ -1,0 +1,10 @@
+INSTRUCCIONES DE ACTUALIZACION
+===============================
+
+1. Descomprime este zip en la carpeta raiz de la web (sobreescribe los archivos existentes).
+
+2. Borra estos archivos que ya no se usan:
+   - images/about/photo_5902422857835285996_y.jpg
+   - images/about/photo_5902422857835285997_y.jpg
+   - images/monicaPlanes/6.webp
+   - images/monicaPlanes/IMG_4542.webp
